@@ -19,9 +19,9 @@ export default class Todo extends Component {
                 {// use when need to write js in jsx
                 this.state.tasks.map(function(taskObj){
                     return(
-                        <li>
+                        <li key={taskObj.id}>
                             <p>{taskObj.task}</p>
-                            <button>Submit</button>
+                            <button>Delete</button>
                         </li>
                     );
                  })
