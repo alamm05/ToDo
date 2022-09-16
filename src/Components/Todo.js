@@ -11,6 +11,16 @@ export default class Todo extends Component {
             curTask:"",
         };
     }
+    handleDeleteTasks=(id)=>{
+        let narr= [];
+        narr = this.state.tasks.filter((taskObj)=>{
+           return taskObj.id !=id
+        });
+        this.setState({
+            tasks:[...narr]
+        });
+       }
+
      handleChange=(e)=>{
         console.log(e.target.value);
         this.setState({
@@ -20,10 +30,13 @@ export default class Todo extends Component {
 
      handleSubmit =()=>{
         this.setState({
-            tasks:[...this.state.tasks,{task:this.state.curTask,id:this.state.tasks.length+1}]
+            tasks:[...this.state.tasks,{task:this.state.curTask,
+                id:this.state.tasks.length+1}
+            ],
+            curTask:"",
         })
      }
-
+    
     render(){
         return(
             // <div>Todo</div>
@@ -31,17 +44,17 @@ export default class Todo extends Component {
                 <input type="text" value={this.state.curTask} onChange={this.handleChange}></input>
                 <button onClick={this.handleSubmit}>Submit</button>
                 {// use when need to write js in jsx
-                this.state.tasks.map(function(taskObj){
+                this.state.tasks.map((taskObj)=>{
                     return(
                         <li key={taskObj.id}>
                             <p>{taskObj.task}</p>
-                            <button>Delete</button>
+                            <button onClick={()=>this.handleDeleteTasks(taskObj.id)}>Delete</button>
                         </li>
                     );
                  })
 
                 }
             </div>
-        )
+        );
     }
 }
