@@ -7,15 +7,29 @@ export default class Todo extends Component {
             tasks:[
                 {id:1, task:"Revise JS"},
                 {id:2, task:"Revise DSA level-1"},
-            ]
+            ],
+            curTask:"",
         };
     }
+     handleChange=(e)=>{
+        console.log(e.target.value);
+        this.setState({
+            curTask:e.target.value,
+        });
+     };
+
+     handleSubmit =()=>{
+        this.setState({
+            tasks:[...this.state.tasks,{task:this.state.curTask,id:this.state.tasks.length+1}]
+        })
+     }
+
     render(){
         return(
             // <div>Todo</div>
             <div>
-                <input type="text"></input>
-                <button>Submit</button>
+                <input type="text" value={this.state.curTask} onChange={this.handleChange}></input>
+                <button onClick={this.handleSubmit}>Submit</button>
                 {// use when need to write js in jsx
                 this.state.tasks.map(function(taskObj){
                     return(
